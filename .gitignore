@@ -3,3 +3,5 @@ core/
 oblsk_connector/
 .claude/
 .remember/
+server.cfg
+*.swp
