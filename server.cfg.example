@@ -25,6 +25,19 @@ set mysql_connection_string "mysql://obelisk:obelisk_password@mariadb:3306/fivem
 # MySQL-only and Database.init() will fail fast if you mix them with postgres.
 set db_driver "mysql"
 
+# "local" (default) or "s3".
+set storage_driver "local"
+
+# local provider
+set storage_local_path "storage"
+
+# s3 provider (S3-compatible: AWS S3, MinIO, R2, Spaces, ...)
+# set storage_s3_endpoint "https://s3.us-east-1.amazonaws.com"
+# set storage_s3_bucket "obelisk-uploads"
+# set storage_s3_key "changeme"
+# set storage_s3_secret "changeme"
+# set storage_s3_region "us-east-1"
+
 ensure oblsk_connector
 ensure core
 
