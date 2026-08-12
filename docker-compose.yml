@@ -1,0 +1,61 @@
+services:
+  # Default DB backend. Not started implicitly — run with `--profile mariadb`
+  # (see docs/guide/installation.md) even for the default case; Compose has
+  # no notion of a profile that's active without a flag.
+  mariadb:
+    image: mariadb:latest
+    container_name: obelisk-mariadb
+    restart: unless-stopped
+    profiles: ["mariadb"]
+    environment:
+      MYSQL_ROOT_PASSWORD: changeme
+      MYSQL_DATABASE: fivem
+      MYSQL_USER: obelisk
+      MYSQL_PASSWORD: obelisk_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+      - ./docker/mariadb/init:/docker-entrypoint-initdb.d
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+  # Alternative to mariadb — start this instead (not alongside) when running
+  # with `db_driver postgres` in server.cfg. Run
+  # `docker compose --profile postgres up postgres fxserver` to use it.
+  postgres:
+    image: postgres:16
+    container_name: obelisk-postgres
+    restart: unless-stopped
+    profiles: ["postgres"]
+    environment:
+      POSTGRES_DB: fivem
+      POSTGRES_USER: obelisk
+      POSTGRES_PASSWORD: obelisk_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  fxserver:
+    build:
+      context: .
+      dockerfile: docker/fivem/Dockerfile
+    container_name: obelisk-fxserver
+    restart: unless-stopped
+    ports:
+      - "30120:30120/tcp"
+      - "30120:30120/udp"
+      - "40120:40120/tcp"
+    volumes:
+      # FXServer build, pulled by scripts/update-fivem-server.(sh|bat)
+      - ./fxserver:/fxserver/server
+      - ./server-data/server.cfg:/fxserver/server/server.cfg:ro
+      # Resources, mounted straight from the repo (edit-in-place, no rebuild)
+      - ./core:/fxserver/server/resources/local/core:ro
+      - ./oblsk_connector:/fxserver/server/resources/local/oblsk_connector:ro
+
+volumes:
+  mariadb_data:
+    driver: local
+  postgres_data:
+    driver: local
