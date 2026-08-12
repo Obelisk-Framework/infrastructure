@@ -49,7 +49,7 @@ services:
     volumes:
       # FXServer build, pulled by scripts/update-fivem-server.(sh|bat)
       - ./fxserver:/fxserver/server
-      - ./server-data/server.cfg:/fxserver/server/server.cfg:ro
+      - ./server.cfg:/fxserver/server/server.cfg:ro
       # Resources, mounted straight from the repo (edit-in-place, no rebuild)
       - ./core:/fxserver/server/resources/local/core:ro
       - ./oblsk_connector:/fxserver/server/resources/local/oblsk_connector:ro
