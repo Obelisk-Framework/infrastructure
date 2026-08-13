@@ -5,3 +5,4 @@ oblsk_connector/
 .remember/
 server.cfg
 *.swp
+.worktrees/
