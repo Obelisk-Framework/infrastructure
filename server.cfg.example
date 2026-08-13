@@ -38,6 +38,15 @@ set storage_local_path "storage"
 # set storage_s3_secret "changeme"
 # set storage_s3_region "us-east-1"
 
+# Date/number/currency formatting (core/shared/Settings.lua). All optional,
+# defaults shown below.
+# set date_format "YYYY-MM-DD"           # tokens: YYYY MM DD HH mm ss
+# set number_decimal_sep "."
+# set number_thousands_sep ","
+# set currency_symbol "$"
+# set currency_position "before"         # "before" or "after"
+# set timezone_offset_minutes 0          # minutes offset from UTC, e.g. -300 for UTC-5
+
 ensure oblsk_connector
 ensure core
 
