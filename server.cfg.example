@@ -38,6 +38,12 @@ set storage_local_path "storage"
 # set storage_s3_secret "changeme"
 # set storage_s3_region "us-east-1"
 
+# The port this server's own HTTP endpoint listens on - must match the
+# port in endpoint_add_tcp/endpoint_add_udp above. Used by Storage.uploadUrl()
+# so in-process resources (like screencapture's server-side upload exports)
+# can POST back to this server's own /storage/upload endpoint.
+set storage_http_port "30120"
+
 # Date/number/currency formatting (core/shared/Settings.lua). All optional,
 # defaults shown below.
 # set date_format "YYYY-MM-DD"           # tokens: YYYY MM DD HH mm ss
@@ -48,6 +54,7 @@ set storage_local_path "storage"
 # set timezone_offset_minutes 0          # minutes offset from UTC, e.g. -300 for UTC-5
 
 ensure oblsk_connector
+ensure screencapture
 ensure core
 
 sv_enforceGameBuild 2802
