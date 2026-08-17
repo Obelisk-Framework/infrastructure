@@ -1,8 +1,11 @@
 fxserver/
 core/
+docs/superpowers/
 oblsk_connector/
 .claude/
 .remember/
 server.cfg
 *.swp
 .worktrees/
+.playwright-mcp/
+.zcode/
