@@ -50,9 +50,14 @@ services:
       # FXServer build, pulled by scripts/update-fivem-server.(sh|bat)
       - ./fxserver:/fxserver/server
       - ./server.cfg:/fxserver/server/server.cfg:ro
-      # Resources, mounted straight from the repo (edit-in-place, no rebuild)
-      - ./core:/fxserver/server/resources/local/core:ro
-      - ./oblsk_connector:/fxserver/server/resources/local/oblsk_connector:ro
+      # Resources, mounted straight from the repo (edit-in-place, no rebuild).
+      # Mounted directly under resources/ (not resources/local/) — FXServer's
+      # resource scanner counted resources nested under a non-bracketed
+      # "local" category folder but never actually registered them by name,
+      # so `ensure core`/`ensure oblsk_connector` failed with "Couldn't find
+      # resource" even after boot completed.
+      - ./core:/fxserver/server/resources/core:ro
+      - ./oblsk_connector:/fxserver/server/resources/oblsk_connector:ro
 
 volumes:
   mariadb_data:
