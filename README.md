@@ -133,7 +133,7 @@ You can select another Cfx.re channel:
 
 Supported channel arguments are `recommended`, `latest`, `optional`, and `critical`. Stop FXServer before replacing an existing build, then start it again after the script finishes.
 
-If `fxserver/` does not contain `run.sh`, the container bootstraps the configured channel automatically. Set `FXSERVER_CHANNEL` for the container if you need a channel other than `recommended`.
+If `fxserver/` does not contain `run.sh`, the container automatically bootstraps the recommended channel.
 
 ## Repository layout
 
