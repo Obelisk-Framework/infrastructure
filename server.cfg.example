@@ -57,7 +57,6 @@ set phone_gallery_max_items 200
 # set timezone_offset_minutes 0          # minutes offset from UTC, e.g. -300 for UTC-5
 
 ensure oblsk_connector
-ensure screencapture
 ensure core
 
 sv_enforceGameBuild 2802
